@@ -1,2 +1,19 @@
-# zaly-wing
-使用TCP替代HTTP的一种实现方式，使用zaly协议，实现TCP远程调用API接口的客户端以及服务端
+Copyright 2018-2028 Akaxin Group.
+ 
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+ 
+     http://www.apache.org/licenses/LICENSE-2.0
+ 
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+----------------------------[openzaly-wing]------------------------------
+
+项目名称：openzaly-wing 
+	説明：使用TCP代替HTTP短链接访问的开源项目
+

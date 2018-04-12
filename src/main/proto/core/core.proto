@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+// 用于描述整个体系中基础、共用的数据结构。
+// 原则1：网络通讯设计的各类用语，以客户端为中心。
+package core;
+
+option java_package = "com.akaxin.zaly.proto";
+option java_outer_classname = "CoreProto";
+
+//请求的Errinfo
+message ErrorInfo {
+	string code = 1;
+	string info = 2;
+}
+
+//传输的数据体
+message TransportPackageData {
+	map < int32, string > header = 1; //header
+	bytes body = 2; //body
+	ErrorInfo err = 3; //errInfo
+}
+
+enum HeaderKey {
+//0-500 分配给CLIENT
+	CLIENT_VERSION = 0; //0.3.2
+	CLIENT_SESSION_ID = 1;
+	CLIENT_LANGUAGE = 2; // 客户端正在使用的语言, cn/en
+	CLIENT_SOCKET_TYPE = 3;
+
+	//501-1000 分配给CLIENT_REQUEST
+	CLIENT_REQUEST_REFERER = 501;
+	CLIENT_REQUEST_SERVER_HOST = 502; //客户端访问的服务host
+	CLIENT_REQUEST_SERVER_PORT = 503; //客户端访问的服务port
+
+	//1001-2000 分配给SERVER
+	SERVER_VERSION = 1001; //服务端地址
+	SERVER_HOST = 1002; //服务端host
+	SERVER_PORT = 1003; //服务端port
+}
