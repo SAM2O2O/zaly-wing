@@ -85,7 +85,7 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<RedisCommand
 		command.setClientIp(clientIp);
 		command.setAction(action);
 		command.setHeader(packageData.getHeaderMap());
-		command.setParams(packageData.getBody().toByteArray());
+		command.setParams(packageData.getData().toByteArray());
 		command.setChannelSession(channelSession);
 		command.setStartTime(System.currentTimeMillis());
 

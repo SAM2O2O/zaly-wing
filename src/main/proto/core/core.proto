@@ -15,9 +15,17 @@ message ErrorInfo {
 
 //传输的数据体
 message TransportPackageData {
-	map < int32, string > header = 1; //header
-	bytes body = 2; //body
-	ErrorInfo err = 3; //errInfo
+	//错误信息，如果err不为null，data很有可能是无用的。
+    ErrorInfo err = 1;
+
+    //业务Data，由业务逻辑自己解析
+    bytes data = 2;
+
+    //非业务逻辑的必要数据
+    // 分为两个级别：Socket级 与 Request级
+    // Socket级：只在链接建立后的第一个请求中传递，在链接的整个生命周期都有效。
+    // Request级：在每一次请求中都可能会变化并传递。
+    map<int32, string> header = 3;
 }
 
 enum HeaderKey {

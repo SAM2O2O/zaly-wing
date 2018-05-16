@@ -924,18 +924,58 @@ public final class CoreProto {
 
     /**
      * <pre>
-     *header
+     *错误信息，如果err不为null，data很有可能是无用的。
      * </pre>
      *
-     * <code>map&lt;int32, string&gt; header = 1;</code>
+     * <code>.core.ErrorInfo err = 1;</code>
+     */
+    boolean hasErr();
+    /**
+     * <pre>
+     *错误信息，如果err不为null，data很有可能是无用的。
+     * </pre>
+     *
+     * <code>.core.ErrorInfo err = 1;</code>
+     */
+    com.akaxin.zaly.proto.CoreProto.ErrorInfo getErr();
+    /**
+     * <pre>
+     *错误信息，如果err不为null，data很有可能是无用的。
+     * </pre>
+     *
+     * <code>.core.ErrorInfo err = 1;</code>
+     */
+    com.akaxin.zaly.proto.CoreProto.ErrorInfoOrBuilder getErrOrBuilder();
+
+    /**
+     * <pre>
+     *业务Data，由业务逻辑自己解析
+     * </pre>
+     *
+     * <code>bytes data = 2;</code>
+     */
+    com.google.protobuf.ByteString getData();
+
+    /**
+     * <pre>
+     *非业务逻辑的必要数据
+     * 分为两个级别：Socket级 与 Request级
+     * Socket级：只在链接建立后的第一个请求中传递，在链接的整个生命周期都有效。
+     * Request级：在每一次请求中都可能会变化并传递。
+     * </pre>
+     *
+     * <code>map&lt;int32, string&gt; header = 3;</code>
      */
     int getHeaderCount();
     /**
      * <pre>
-     *header
+     *非业务逻辑的必要数据
+     * 分为两个级别：Socket级 与 Request级
+     * Socket级：只在链接建立后的第一个请求中传递，在链接的整个生命周期都有效。
+     * Request级：在每一次请求中都可能会变化并传递。
      * </pre>
      *
-     * <code>map&lt;int32, string&gt; header = 1;</code>
+     * <code>map&lt;int32, string&gt; header = 3;</code>
      */
     boolean containsHeader(
         int key);
@@ -947,19 +987,25 @@ public final class CoreProto {
     getHeader();
     /**
      * <pre>
-     *header
+     *非业务逻辑的必要数据
+     * 分为两个级别：Socket级 与 Request级
+     * Socket级：只在链接建立后的第一个请求中传递，在链接的整个生命周期都有效。
+     * Request级：在每一次请求中都可能会变化并传递。
      * </pre>
      *
-     * <code>map&lt;int32, string&gt; header = 1;</code>
+     * <code>map&lt;int32, string&gt; header = 3;</code>
      */
     java.util.Map<java.lang.Integer, java.lang.String>
     getHeaderMap();
     /**
      * <pre>
-     *header
+     *非业务逻辑的必要数据
+     * 分为两个级别：Socket级 与 Request级
+     * Socket级：只在链接建立后的第一个请求中传递，在链接的整个生命周期都有效。
+     * Request级：在每一次请求中都可能会变化并传递。
      * </pre>
      *
-     * <code>map&lt;int32, string&gt; header = 1;</code>
+     * <code>map&lt;int32, string&gt; header = 3;</code>
      */
 
     java.lang.String getHeaderOrDefault(
@@ -967,48 +1013,17 @@ public final class CoreProto {
         java.lang.String defaultValue);
     /**
      * <pre>
-     *header
+     *非业务逻辑的必要数据
+     * 分为两个级别：Socket级 与 Request级
+     * Socket级：只在链接建立后的第一个请求中传递，在链接的整个生命周期都有效。
+     * Request级：在每一次请求中都可能会变化并传递。
      * </pre>
      *
-     * <code>map&lt;int32, string&gt; header = 1;</code>
+     * <code>map&lt;int32, string&gt; header = 3;</code>
      */
 
     java.lang.String getHeaderOrThrow(
         int key);
-
-    /**
-     * <pre>
-     *body
-     * </pre>
-     *
-     * <code>bytes body = 2;</code>
-     */
-    com.google.protobuf.ByteString getBody();
-
-    /**
-     * <pre>
-     *errInfo
-     * </pre>
-     *
-     * <code>.core.ErrorInfo err = 3;</code>
-     */
-    boolean hasErr();
-    /**
-     * <pre>
-     *errInfo
-     * </pre>
-     *
-     * <code>.core.ErrorInfo err = 3;</code>
-     */
-    com.akaxin.zaly.proto.CoreProto.ErrorInfo getErr();
-    /**
-     * <pre>
-     *errInfo
-     * </pre>
-     *
-     * <code>.core.ErrorInfo err = 3;</code>
-     */
-    com.akaxin.zaly.proto.CoreProto.ErrorInfoOrBuilder getErrOrBuilder();
   }
   /**
    * <pre>
@@ -1027,7 +1042,7 @@ public final class CoreProto {
       super(builder);
     }
     private TransportPackageData() {
-      body_ = com.google.protobuf.ByteString.EMPTY;
+      data_ = com.google.protobuf.ByteString.EMPTY;
     }
 
     @java.lang.Override
@@ -1062,24 +1077,6 @@ public final class CoreProto {
               break;
             }
             case 10: {
-              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-                header_ = com.google.protobuf.MapField.newMapField(
-                    HeaderDefaultEntryHolder.defaultEntry);
-                mutable_bitField0_ |= 0x00000001;
-              }
-              com.google.protobuf.MapEntry<java.lang.Integer, java.lang.String>
-              header__ = input.readMessage(
-                  HeaderDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
-              header_.getMutableMap().put(
-                  header__.getKey(), header__.getValue());
-              break;
-            }
-            case 18: {
-
-              body_ = input.readBytes();
-              break;
-            }
-            case 26: {
               com.akaxin.zaly.proto.CoreProto.ErrorInfo.Builder subBuilder = null;
               if (err_ != null) {
                 subBuilder = err_.toBuilder();
@@ -1090,6 +1087,24 @@ public final class CoreProto {
                 err_ = subBuilder.buildPartial();
               }
 
+              break;
+            }
+            case 18: {
+
+              data_ = input.readBytes();
+              break;
+            }
+            case 26: {
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+                header_ = com.google.protobuf.MapField.newMapField(
+                    HeaderDefaultEntryHolder.defaultEntry);
+                mutable_bitField0_ |= 0x00000004;
+              }
+              com.google.protobuf.MapEntry<java.lang.Integer, java.lang.String>
+              header__ = input.readMessage(
+                  HeaderDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
+              header_.getMutableMap().put(
+                  header__.getKey(), header__.getValue());
               break;
             }
           }
@@ -1113,7 +1128,7 @@ public final class CoreProto {
     protected com.google.protobuf.MapField internalGetMapField(
         int number) {
       switch (number) {
-        case 1:
+        case 3:
           return internalGetHeader();
         default:
           throw new RuntimeException(
@@ -1128,7 +1143,53 @@ public final class CoreProto {
     }
 
     private int bitField0_;
-    public static final int HEADER_FIELD_NUMBER = 1;
+    public static final int ERR_FIELD_NUMBER = 1;
+    private com.akaxin.zaly.proto.CoreProto.ErrorInfo err_;
+    /**
+     * <pre>
+     *错误信息，如果err不为null，data很有可能是无用的。
+     * </pre>
+     *
+     * <code>.core.ErrorInfo err = 1;</code>
+     */
+    public boolean hasErr() {
+      return err_ != null;
+    }
+    /**
+     * <pre>
+     *错误信息，如果err不为null，data很有可能是无用的。
+     * </pre>
+     *
+     * <code>.core.ErrorInfo err = 1;</code>
+     */
+    public com.akaxin.zaly.proto.CoreProto.ErrorInfo getErr() {
+      return err_ == null ? com.akaxin.zaly.proto.CoreProto.ErrorInfo.getDefaultInstance() : err_;
+    }
+    /**
+     * <pre>
+     *错误信息，如果err不为null，data很有可能是无用的。
+     * </pre>
+     *
+     * <code>.core.ErrorInfo err = 1;</code>
+     */
+    public com.akaxin.zaly.proto.CoreProto.ErrorInfoOrBuilder getErrOrBuilder() {
+      return getErr();
+    }
+
+    public static final int DATA_FIELD_NUMBER = 2;
+    private com.google.protobuf.ByteString data_;
+    /**
+     * <pre>
+     *业务Data，由业务逻辑自己解析
+     * </pre>
+     *
+     * <code>bytes data = 2;</code>
+     */
+    public com.google.protobuf.ByteString getData() {
+      return data_;
+    }
+
+    public static final int HEADER_FIELD_NUMBER = 3;
     private static final class HeaderDefaultEntryHolder {
       static final com.google.protobuf.MapEntry<
           java.lang.Integer, java.lang.String> defaultEntry =
@@ -1156,10 +1217,13 @@ public final class CoreProto {
     }
     /**
      * <pre>
-     *header
+     *非业务逻辑的必要数据
+     * 分为两个级别：Socket级 与 Request级
+     * Socket级：只在链接建立后的第一个请求中传递，在链接的整个生命周期都有效。
+     * Request级：在每一次请求中都可能会变化并传递。
      * </pre>
      *
-     * <code>map&lt;int32, string&gt; header = 1;</code>
+     * <code>map&lt;int32, string&gt; header = 3;</code>
      */
 
     public boolean containsHeader(
@@ -1176,10 +1240,13 @@ public final class CoreProto {
     }
     /**
      * <pre>
-     *header
+     *非业务逻辑的必要数据
+     * 分为两个级别：Socket级 与 Request级
+     * Socket级：只在链接建立后的第一个请求中传递，在链接的整个生命周期都有效。
+     * Request级：在每一次请求中都可能会变化并传递。
      * </pre>
      *
-     * <code>map&lt;int32, string&gt; header = 1;</code>
+     * <code>map&lt;int32, string&gt; header = 3;</code>
      */
 
     public java.util.Map<java.lang.Integer, java.lang.String> getHeaderMap() {
@@ -1187,10 +1254,13 @@ public final class CoreProto {
     }
     /**
      * <pre>
-     *header
+     *非业务逻辑的必要数据
+     * 分为两个级别：Socket级 与 Request级
+     * Socket级：只在链接建立后的第一个请求中传递，在链接的整个生命周期都有效。
+     * Request级：在每一次请求中都可能会变化并传递。
      * </pre>
      *
-     * <code>map&lt;int32, string&gt; header = 1;</code>
+     * <code>map&lt;int32, string&gt; header = 3;</code>
      */
 
     public java.lang.String getHeaderOrDefault(
@@ -1203,10 +1273,13 @@ public final class CoreProto {
     }
     /**
      * <pre>
-     *header
+     *非业务逻辑的必要数据
+     * 分为两个级别：Socket级 与 Request级
+     * Socket级：只在链接建立后的第一个请求中传递，在链接的整个生命周期都有效。
+     * Request级：在每一次请求中都可能会变化并传递。
      * </pre>
      *
-     * <code>map&lt;int32, string&gt; header = 1;</code>
+     * <code>map&lt;int32, string&gt; header = 3;</code>
      */
 
     public java.lang.String getHeaderOrThrow(
@@ -1218,52 +1291,6 @@ public final class CoreProto {
         throw new java.lang.IllegalArgumentException();
       }
       return map.get(key);
-    }
-
-    public static final int BODY_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString body_;
-    /**
-     * <pre>
-     *body
-     * </pre>
-     *
-     * <code>bytes body = 2;</code>
-     */
-    public com.google.protobuf.ByteString getBody() {
-      return body_;
-    }
-
-    public static final int ERR_FIELD_NUMBER = 3;
-    private com.akaxin.zaly.proto.CoreProto.ErrorInfo err_;
-    /**
-     * <pre>
-     *errInfo
-     * </pre>
-     *
-     * <code>.core.ErrorInfo err = 3;</code>
-     */
-    public boolean hasErr() {
-      return err_ != null;
-    }
-    /**
-     * <pre>
-     *errInfo
-     * </pre>
-     *
-     * <code>.core.ErrorInfo err = 3;</code>
-     */
-    public com.akaxin.zaly.proto.CoreProto.ErrorInfo getErr() {
-      return err_ == null ? com.akaxin.zaly.proto.CoreProto.ErrorInfo.getDefaultInstance() : err_;
-    }
-    /**
-     * <pre>
-     *errInfo
-     * </pre>
-     *
-     * <code>.core.ErrorInfo err = 3;</code>
-     */
-    public com.akaxin.zaly.proto.CoreProto.ErrorInfoOrBuilder getErrOrBuilder() {
-      return getErr();
     }
 
     private byte memoizedIsInitialized = -1;
@@ -1278,18 +1305,18 @@ public final class CoreProto {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      if (err_ != null) {
+        output.writeMessage(1, getErr());
+      }
+      if (!data_.isEmpty()) {
+        output.writeBytes(2, data_);
+      }
       com.google.protobuf.GeneratedMessageV3
         .serializeIntegerMapTo(
           output,
           internalGetHeader(),
           HeaderDefaultEntryHolder.defaultEntry,
-          1);
-      if (!body_.isEmpty()) {
-        output.writeBytes(2, body_);
-      }
-      if (err_ != null) {
-        output.writeMessage(3, getErr());
-      }
+          3);
       unknownFields.writeTo(output);
     }
 
@@ -1298,6 +1325,14 @@ public final class CoreProto {
       if (size != -1) return size;
 
       size = 0;
+      if (err_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, getErr());
+      }
+      if (!data_.isEmpty()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, data_);
+      }
       for (java.util.Map.Entry<java.lang.Integer, java.lang.String> entry
            : internalGetHeader().getMap().entrySet()) {
         com.google.protobuf.MapEntry<java.lang.Integer, java.lang.String>
@@ -1306,15 +1341,7 @@ public final class CoreProto {
             .setValue(entry.getValue())
             .build();
         size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(1, header__);
-      }
-      if (!body_.isEmpty()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, body_);
-      }
-      if (err_ != null) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, getErr());
+            .computeMessageSize(3, header__);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -1332,15 +1359,15 @@ public final class CoreProto {
       com.akaxin.zaly.proto.CoreProto.TransportPackageData other = (com.akaxin.zaly.proto.CoreProto.TransportPackageData) obj;
 
       boolean result = true;
-      result = result && internalGetHeader().equals(
-          other.internalGetHeader());
-      result = result && getBody()
-          .equals(other.getBody());
       result = result && (hasErr() == other.hasErr());
       if (hasErr()) {
         result = result && getErr()
             .equals(other.getErr());
       }
+      result = result && getData()
+          .equals(other.getData());
+      result = result && internalGetHeader().equals(
+          other.internalGetHeader());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -1352,15 +1379,15 @@ public final class CoreProto {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      if (!internalGetHeader().getMap().isEmpty()) {
-        hash = (37 * hash) + HEADER_FIELD_NUMBER;
-        hash = (53 * hash) + internalGetHeader().hashCode();
-      }
-      hash = (37 * hash) + BODY_FIELD_NUMBER;
-      hash = (53 * hash) + getBody().hashCode();
       if (hasErr()) {
         hash = (37 * hash) + ERR_FIELD_NUMBER;
         hash = (53 * hash) + getErr().hashCode();
+      }
+      hash = (37 * hash) + DATA_FIELD_NUMBER;
+      hash = (53 * hash) + getData().hashCode();
+      if (!internalGetHeader().getMap().isEmpty()) {
+        hash = (37 * hash) + HEADER_FIELD_NUMBER;
+        hash = (53 * hash) + internalGetHeader().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -1475,7 +1502,7 @@ public final class CoreProto {
       protected com.google.protobuf.MapField internalGetMapField(
           int number) {
         switch (number) {
-          case 1:
+          case 3:
             return internalGetHeader();
           default:
             throw new RuntimeException(
@@ -1486,7 +1513,7 @@ public final class CoreProto {
       protected com.google.protobuf.MapField internalGetMutableMapField(
           int number) {
         switch (number) {
-          case 1:
+          case 3:
             return internalGetMutableHeader();
           default:
             throw new RuntimeException(
@@ -1517,15 +1544,15 @@ public final class CoreProto {
       }
       public Builder clear() {
         super.clear();
-        internalGetMutableHeader().clear();
-        body_ = com.google.protobuf.ByteString.EMPTY;
-
         if (errBuilder_ == null) {
           err_ = null;
         } else {
           err_ = null;
           errBuilder_ = null;
         }
+        data_ = com.google.protobuf.ByteString.EMPTY;
+
+        internalGetMutableHeader().clear();
         return this;
       }
 
@@ -1550,14 +1577,14 @@ public final class CoreProto {
         com.akaxin.zaly.proto.CoreProto.TransportPackageData result = new com.akaxin.zaly.proto.CoreProto.TransportPackageData(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
-        result.header_ = internalGetHeader();
-        result.header_.makeImmutable();
-        result.body_ = body_;
         if (errBuilder_ == null) {
           result.err_ = err_;
         } else {
           result.err_ = errBuilder_.build();
         }
+        result.data_ = data_;
+        result.header_ = internalGetHeader();
+        result.header_.makeImmutable();
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1600,14 +1627,14 @@ public final class CoreProto {
 
       public Builder mergeFrom(com.akaxin.zaly.proto.CoreProto.TransportPackageData other) {
         if (other == com.akaxin.zaly.proto.CoreProto.TransportPackageData.getDefaultInstance()) return this;
-        internalGetMutableHeader().mergeFrom(
-            other.internalGetHeader());
-        if (other.getBody() != com.google.protobuf.ByteString.EMPTY) {
-          setBody(other.getBody());
-        }
         if (other.hasErr()) {
           mergeErr(other.getErr());
         }
+        if (other.getData() != com.google.protobuf.ByteString.EMPTY) {
+          setData(other.getData());
+        }
+        internalGetMutableHeader().mergeFrom(
+            other.internalGetHeader());
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
@@ -1635,6 +1662,200 @@ public final class CoreProto {
         return this;
       }
       private int bitField0_;
+
+      private com.akaxin.zaly.proto.CoreProto.ErrorInfo err_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.akaxin.zaly.proto.CoreProto.ErrorInfo, com.akaxin.zaly.proto.CoreProto.ErrorInfo.Builder, com.akaxin.zaly.proto.CoreProto.ErrorInfoOrBuilder> errBuilder_;
+      /**
+       * <pre>
+       *错误信息，如果err不为null，data很有可能是无用的。
+       * </pre>
+       *
+       * <code>.core.ErrorInfo err = 1;</code>
+       */
+      public boolean hasErr() {
+        return errBuilder_ != null || err_ != null;
+      }
+      /**
+       * <pre>
+       *错误信息，如果err不为null，data很有可能是无用的。
+       * </pre>
+       *
+       * <code>.core.ErrorInfo err = 1;</code>
+       */
+      public com.akaxin.zaly.proto.CoreProto.ErrorInfo getErr() {
+        if (errBuilder_ == null) {
+          return err_ == null ? com.akaxin.zaly.proto.CoreProto.ErrorInfo.getDefaultInstance() : err_;
+        } else {
+          return errBuilder_.getMessage();
+        }
+      }
+      /**
+       * <pre>
+       *错误信息，如果err不为null，data很有可能是无用的。
+       * </pre>
+       *
+       * <code>.core.ErrorInfo err = 1;</code>
+       */
+      public Builder setErr(com.akaxin.zaly.proto.CoreProto.ErrorInfo value) {
+        if (errBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          err_ = value;
+          onChanged();
+        } else {
+          errBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       *错误信息，如果err不为null，data很有可能是无用的。
+       * </pre>
+       *
+       * <code>.core.ErrorInfo err = 1;</code>
+       */
+      public Builder setErr(
+          com.akaxin.zaly.proto.CoreProto.ErrorInfo.Builder builderForValue) {
+        if (errBuilder_ == null) {
+          err_ = builderForValue.build();
+          onChanged();
+        } else {
+          errBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       *错误信息，如果err不为null，data很有可能是无用的。
+       * </pre>
+       *
+       * <code>.core.ErrorInfo err = 1;</code>
+       */
+      public Builder mergeErr(com.akaxin.zaly.proto.CoreProto.ErrorInfo value) {
+        if (errBuilder_ == null) {
+          if (err_ != null) {
+            err_ =
+              com.akaxin.zaly.proto.CoreProto.ErrorInfo.newBuilder(err_).mergeFrom(value).buildPartial();
+          } else {
+            err_ = value;
+          }
+          onChanged();
+        } else {
+          errBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       *错误信息，如果err不为null，data很有可能是无用的。
+       * </pre>
+       *
+       * <code>.core.ErrorInfo err = 1;</code>
+       */
+      public Builder clearErr() {
+        if (errBuilder_ == null) {
+          err_ = null;
+          onChanged();
+        } else {
+          err_ = null;
+          errBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       *错误信息，如果err不为null，data很有可能是无用的。
+       * </pre>
+       *
+       * <code>.core.ErrorInfo err = 1;</code>
+       */
+      public com.akaxin.zaly.proto.CoreProto.ErrorInfo.Builder getErrBuilder() {
+        
+        onChanged();
+        return getErrFieldBuilder().getBuilder();
+      }
+      /**
+       * <pre>
+       *错误信息，如果err不为null，data很有可能是无用的。
+       * </pre>
+       *
+       * <code>.core.ErrorInfo err = 1;</code>
+       */
+      public com.akaxin.zaly.proto.CoreProto.ErrorInfoOrBuilder getErrOrBuilder() {
+        if (errBuilder_ != null) {
+          return errBuilder_.getMessageOrBuilder();
+        } else {
+          return err_ == null ?
+              com.akaxin.zaly.proto.CoreProto.ErrorInfo.getDefaultInstance() : err_;
+        }
+      }
+      /**
+       * <pre>
+       *错误信息，如果err不为null，data很有可能是无用的。
+       * </pre>
+       *
+       * <code>.core.ErrorInfo err = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.akaxin.zaly.proto.CoreProto.ErrorInfo, com.akaxin.zaly.proto.CoreProto.ErrorInfo.Builder, com.akaxin.zaly.proto.CoreProto.ErrorInfoOrBuilder> 
+          getErrFieldBuilder() {
+        if (errBuilder_ == null) {
+          errBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.akaxin.zaly.proto.CoreProto.ErrorInfo, com.akaxin.zaly.proto.CoreProto.ErrorInfo.Builder, com.akaxin.zaly.proto.CoreProto.ErrorInfoOrBuilder>(
+                  getErr(),
+                  getParentForChildren(),
+                  isClean());
+          err_ = null;
+        }
+        return errBuilder_;
+      }
+
+      private com.google.protobuf.ByteString data_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <pre>
+       *业务Data，由业务逻辑自己解析
+       * </pre>
+       *
+       * <code>bytes data = 2;</code>
+       */
+      public com.google.protobuf.ByteString getData() {
+        return data_;
+      }
+      /**
+       * <pre>
+       *业务Data，由业务逻辑自己解析
+       * </pre>
+       *
+       * <code>bytes data = 2;</code>
+       */
+      public Builder setData(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        data_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *业务Data，由业务逻辑自己解析
+       * </pre>
+       *
+       * <code>bytes data = 2;</code>
+       */
+      public Builder clearData() {
+        
+        data_ = getDefaultInstance().getData();
+        onChanged();
+        return this;
+      }
 
       private com.google.protobuf.MapField<
           java.lang.Integer, java.lang.String> header_;
@@ -1664,10 +1885,13 @@ public final class CoreProto {
       }
       /**
        * <pre>
-       *header
+       *非业务逻辑的必要数据
+       * 分为两个级别：Socket级 与 Request级
+       * Socket级：只在链接建立后的第一个请求中传递，在链接的整个生命周期都有效。
+       * Request级：在每一次请求中都可能会变化并传递。
        * </pre>
        *
-       * <code>map&lt;int32, string&gt; header = 1;</code>
+       * <code>map&lt;int32, string&gt; header = 3;</code>
        */
 
       public boolean containsHeader(
@@ -1684,10 +1908,13 @@ public final class CoreProto {
       }
       /**
        * <pre>
-       *header
+       *非业务逻辑的必要数据
+       * 分为两个级别：Socket级 与 Request级
+       * Socket级：只在链接建立后的第一个请求中传递，在链接的整个生命周期都有效。
+       * Request级：在每一次请求中都可能会变化并传递。
        * </pre>
        *
-       * <code>map&lt;int32, string&gt; header = 1;</code>
+       * <code>map&lt;int32, string&gt; header = 3;</code>
        */
 
       public java.util.Map<java.lang.Integer, java.lang.String> getHeaderMap() {
@@ -1695,10 +1922,13 @@ public final class CoreProto {
       }
       /**
        * <pre>
-       *header
+       *非业务逻辑的必要数据
+       * 分为两个级别：Socket级 与 Request级
+       * Socket级：只在链接建立后的第一个请求中传递，在链接的整个生命周期都有效。
+       * Request级：在每一次请求中都可能会变化并传递。
        * </pre>
        *
-       * <code>map&lt;int32, string&gt; header = 1;</code>
+       * <code>map&lt;int32, string&gt; header = 3;</code>
        */
 
       public java.lang.String getHeaderOrDefault(
@@ -1711,10 +1941,13 @@ public final class CoreProto {
       }
       /**
        * <pre>
-       *header
+       *非业务逻辑的必要数据
+       * 分为两个级别：Socket级 与 Request级
+       * Socket级：只在链接建立后的第一个请求中传递，在链接的整个生命周期都有效。
+       * Request级：在每一次请求中都可能会变化并传递。
        * </pre>
        *
-       * <code>map&lt;int32, string&gt; header = 1;</code>
+       * <code>map&lt;int32, string&gt; header = 3;</code>
        */
 
       public java.lang.String getHeaderOrThrow(
@@ -1735,10 +1968,13 @@ public final class CoreProto {
       }
       /**
        * <pre>
-       *header
+       *非业务逻辑的必要数据
+       * 分为两个级别：Socket级 与 Request级
+       * Socket级：只在链接建立后的第一个请求中传递，在链接的整个生命周期都有效。
+       * Request级：在每一次请求中都可能会变化并传递。
        * </pre>
        *
-       * <code>map&lt;int32, string&gt; header = 1;</code>
+       * <code>map&lt;int32, string&gt; header = 3;</code>
        */
 
       public Builder removeHeader(
@@ -1758,10 +1994,13 @@ public final class CoreProto {
       }
       /**
        * <pre>
-       *header
+       *非业务逻辑的必要数据
+       * 分为两个级别：Socket级 与 Request级
+       * Socket级：只在链接建立后的第一个请求中传递，在链接的整个生命周期都有效。
+       * Request级：在每一次请求中都可能会变化并传递。
        * </pre>
        *
-       * <code>map&lt;int32, string&gt; header = 1;</code>
+       * <code>map&lt;int32, string&gt; header = 3;</code>
        */
       public Builder putHeader(
           int key,
@@ -1774,10 +2013,13 @@ public final class CoreProto {
       }
       /**
        * <pre>
-       *header
+       *非业务逻辑的必要数据
+       * 分为两个级别：Socket级 与 Request级
+       * Socket级：只在链接建立后的第一个请求中传递，在链接的整个生命周期都有效。
+       * Request级：在每一次请求中都可能会变化并传递。
        * </pre>
        *
-       * <code>map&lt;int32, string&gt; header = 1;</code>
+       * <code>map&lt;int32, string&gt; header = 3;</code>
        */
 
       public Builder putAllHeader(
@@ -1785,200 +2027,6 @@ public final class CoreProto {
         internalGetMutableHeader().getMutableMap()
             .putAll(values);
         return this;
-      }
-
-      private com.google.protobuf.ByteString body_ = com.google.protobuf.ByteString.EMPTY;
-      /**
-       * <pre>
-       *body
-       * </pre>
-       *
-       * <code>bytes body = 2;</code>
-       */
-      public com.google.protobuf.ByteString getBody() {
-        return body_;
-      }
-      /**
-       * <pre>
-       *body
-       * </pre>
-       *
-       * <code>bytes body = 2;</code>
-       */
-      public Builder setBody(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        body_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *body
-       * </pre>
-       *
-       * <code>bytes body = 2;</code>
-       */
-      public Builder clearBody() {
-        
-        body_ = getDefaultInstance().getBody();
-        onChanged();
-        return this;
-      }
-
-      private com.akaxin.zaly.proto.CoreProto.ErrorInfo err_ = null;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          com.akaxin.zaly.proto.CoreProto.ErrorInfo, com.akaxin.zaly.proto.CoreProto.ErrorInfo.Builder, com.akaxin.zaly.proto.CoreProto.ErrorInfoOrBuilder> errBuilder_;
-      /**
-       * <pre>
-       *errInfo
-       * </pre>
-       *
-       * <code>.core.ErrorInfo err = 3;</code>
-       */
-      public boolean hasErr() {
-        return errBuilder_ != null || err_ != null;
-      }
-      /**
-       * <pre>
-       *errInfo
-       * </pre>
-       *
-       * <code>.core.ErrorInfo err = 3;</code>
-       */
-      public com.akaxin.zaly.proto.CoreProto.ErrorInfo getErr() {
-        if (errBuilder_ == null) {
-          return err_ == null ? com.akaxin.zaly.proto.CoreProto.ErrorInfo.getDefaultInstance() : err_;
-        } else {
-          return errBuilder_.getMessage();
-        }
-      }
-      /**
-       * <pre>
-       *errInfo
-       * </pre>
-       *
-       * <code>.core.ErrorInfo err = 3;</code>
-       */
-      public Builder setErr(com.akaxin.zaly.proto.CoreProto.ErrorInfo value) {
-        if (errBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          err_ = value;
-          onChanged();
-        } else {
-          errBuilder_.setMessage(value);
-        }
-
-        return this;
-      }
-      /**
-       * <pre>
-       *errInfo
-       * </pre>
-       *
-       * <code>.core.ErrorInfo err = 3;</code>
-       */
-      public Builder setErr(
-          com.akaxin.zaly.proto.CoreProto.ErrorInfo.Builder builderForValue) {
-        if (errBuilder_ == null) {
-          err_ = builderForValue.build();
-          onChanged();
-        } else {
-          errBuilder_.setMessage(builderForValue.build());
-        }
-
-        return this;
-      }
-      /**
-       * <pre>
-       *errInfo
-       * </pre>
-       *
-       * <code>.core.ErrorInfo err = 3;</code>
-       */
-      public Builder mergeErr(com.akaxin.zaly.proto.CoreProto.ErrorInfo value) {
-        if (errBuilder_ == null) {
-          if (err_ != null) {
-            err_ =
-              com.akaxin.zaly.proto.CoreProto.ErrorInfo.newBuilder(err_).mergeFrom(value).buildPartial();
-          } else {
-            err_ = value;
-          }
-          onChanged();
-        } else {
-          errBuilder_.mergeFrom(value);
-        }
-
-        return this;
-      }
-      /**
-       * <pre>
-       *errInfo
-       * </pre>
-       *
-       * <code>.core.ErrorInfo err = 3;</code>
-       */
-      public Builder clearErr() {
-        if (errBuilder_ == null) {
-          err_ = null;
-          onChanged();
-        } else {
-          err_ = null;
-          errBuilder_ = null;
-        }
-
-        return this;
-      }
-      /**
-       * <pre>
-       *errInfo
-       * </pre>
-       *
-       * <code>.core.ErrorInfo err = 3;</code>
-       */
-      public com.akaxin.zaly.proto.CoreProto.ErrorInfo.Builder getErrBuilder() {
-        
-        onChanged();
-        return getErrFieldBuilder().getBuilder();
-      }
-      /**
-       * <pre>
-       *errInfo
-       * </pre>
-       *
-       * <code>.core.ErrorInfo err = 3;</code>
-       */
-      public com.akaxin.zaly.proto.CoreProto.ErrorInfoOrBuilder getErrOrBuilder() {
-        if (errBuilder_ != null) {
-          return errBuilder_.getMessageOrBuilder();
-        } else {
-          return err_ == null ?
-              com.akaxin.zaly.proto.CoreProto.ErrorInfo.getDefaultInstance() : err_;
-        }
-      }
-      /**
-       * <pre>
-       *errInfo
-       * </pre>
-       *
-       * <code>.core.ErrorInfo err = 3;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          com.akaxin.zaly.proto.CoreProto.ErrorInfo, com.akaxin.zaly.proto.CoreProto.ErrorInfo.Builder, com.akaxin.zaly.proto.CoreProto.ErrorInfoOrBuilder> 
-          getErrFieldBuilder() {
-        if (errBuilder_ == null) {
-          errBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              com.akaxin.zaly.proto.CoreProto.ErrorInfo, com.akaxin.zaly.proto.CoreProto.ErrorInfo.Builder, com.akaxin.zaly.proto.CoreProto.ErrorInfoOrBuilder>(
-                  getErr(),
-                  getParentForChildren(),
-                  isClean());
-          err_ = null;
-        }
-        return errBuilder_;
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -2055,9 +2103,9 @@ public final class CoreProto {
     java.lang.String[] descriptorData = {
       "\n\017core/core.proto\022\004core\"\'\n\tErrorInfo\022\014\n\004" +
       "code\030\001 \001(\t\022\014\n\004info\030\002 \001(\t\"\251\001\n\024TransportPa" +
-      "ckageData\0226\n\006header\030\001 \003(\0132&.core.Transpo" +
-      "rtPackageData.HeaderEntry\022\014\n\004body\030\002 \001(\014\022" +
-      "\034\n\003err\030\003 \001(\0132\017.core.ErrorInfo\032-\n\013HeaderE" +
+      "ckageData\022\034\n\003err\030\001 \001(\0132\017.core.ErrorInfo\022" +
+      "\014\n\004data\030\002 \001(\014\0226\n\006header\030\003 \003(\0132&.core.Tra" +
+      "nsportPackageData.HeaderEntry\032-\n\013HeaderE" +
       "ntry\022\013\n\003key\030\001 \001(\005\022\r\n\005value\030\002 \001(\t:\0028\001*\373\001\n" +
       "\tHeaderKey\022\022\n\016CLIENT_VERSION\020\000\022\025\n\021CLIENT" +
       "_SESSION_ID\020\001\022\023\n\017CLIENT_LANGUAGE\020\002\022\026\n\022CL" +
@@ -2091,7 +2139,7 @@ public final class CoreProto {
     internal_static_core_TransportPackageData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_core_TransportPackageData_descriptor,
-        new java.lang.String[] { "Header", "Body", "Err", });
+        new java.lang.String[] { "Err", "Data", "Header", });
     internal_static_core_TransportPackageData_HeaderEntry_descriptor =
       internal_static_core_TransportPackageData_descriptor.getNestedTypes().get(0);
     internal_static_core_TransportPackageData_HeaderEntry_fieldAccessorTable = new

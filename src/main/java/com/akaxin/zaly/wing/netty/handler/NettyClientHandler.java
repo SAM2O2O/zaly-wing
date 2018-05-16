@@ -20,9 +20,9 @@ import org.slf4j.LoggerFactory;
 
 import com.akaxin.zaly.proto.CoreProto;
 import com.akaxin.zaly.wing.client.ZalyClient;
-import com.akaxin.zaly.wing.command.Command;
 import com.akaxin.zaly.wing.command.RedisCommand;
 import com.akaxin.zaly.wing.command.RedisCommandResponse;
+import com.google.protobuf.InvalidProtocolBufferException;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -49,20 +49,19 @@ public class NettyClientHandler extends SimpleChannelInboundHandler<RedisCommand
 	}
 
 	@Override
-	protected void channelRead0(ChannelHandlerContext ctx, RedisCommand redisCmd) throws Exception {
+	protected void channelRead0(ChannelHandlerContext ctx, RedisCommand redisCmd) {
 		String version = redisCmd.getParameterByIndex(0);
 		String action = redisCmd.getParameterByIndex(1);
 		byte[] params = redisCmd.getBytesParamByIndex(2);
 
-		CoreProto.TransportPackageData packageData = CoreProto.TransportPackageData.parseFrom(params);
-		CoreProto.ErrorInfo errInfo = packageData.getErr();
-		Command command = new Command();
-		command.setVersion(version);// version of request(client)
-		command.setAction(action);// action of request(client)
-		command.setHeader(packageData.getHeaderMap());
-		command.setParams(packageData.getBody().toByteArray());
-
-		this.zalyClient.handleResponse(new RedisCommandResponse(redisCmd, errInfo.getCode(), errInfo.getInfo()));
+		try {
+			CoreProto.TransportPackageData packageData = CoreProto.TransportPackageData.parseFrom(params);
+			CoreProto.ErrorInfo errInfo = packageData.getErr();
+			byte[] result = packageData.getData().toByteArray();
+			this.zalyClient.handleResponse(new RedisCommandResponse(errInfo, result));
+		} catch (InvalidProtocolBufferException e) {
+			e.printStackTrace();
+		}
 
 	}
 

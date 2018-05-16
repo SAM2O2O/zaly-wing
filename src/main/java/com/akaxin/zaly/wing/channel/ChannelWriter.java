@@ -61,7 +61,7 @@ public class ChannelWriter {
 		packageDataBuilder.putAllHeader(header);
 
 		if (response.getParams() != null) {
-			packageDataBuilder.setBody(ByteString.copyFrom(response.getParams()));
+			packageDataBuilder.setData(ByteString.copyFrom(response.getParams()));
 		}
 		channel.writeAndFlush(new RedisCommand().add(response.getVersion()).add(response.getAction())
 				.add(packageDataBuilder.build().toByteArray()));
@@ -78,7 +78,7 @@ public class ChannelWriter {
 		packageDataBuilder.putAllHeader(header);
 
 		if (response.getParams() != null) {
-			packageDataBuilder.setBody(ByteString.copyFrom(response.getParams()));
+			packageDataBuilder.setData(ByteString.copyFrom(response.getParams()));
 		}
 		channel.writeAndFlush(new RedisCommand().add(response.getVersion()).add(response.getAction())
 				.add(packageDataBuilder.build().toByteArray()))

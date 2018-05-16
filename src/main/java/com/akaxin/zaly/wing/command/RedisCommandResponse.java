@@ -15,30 +15,40 @@
  */
 package com.akaxin.zaly.wing.command;
 
+import com.akaxin.zaly.proto.CoreProto.ErrorInfo;
 import com.google.gson.Gson;
 
 public class RedisCommandResponse {
 
-	private final RedisCommand redisCommand;
-	private final String errCode;
-	private final String errInfo;
+	private ErrorInfo errInfo;
+	private byte[] params;
 
-	public RedisCommandResponse(RedisCommand redisCommand, String errCode, String errInfo) {
-		this.redisCommand = redisCommand;
-		this.errCode = errCode;
+	public RedisCommandResponse(ErrorInfo errInfo, byte[] params) {
 		this.errInfo = errInfo;
-	}
-
-	public RedisCommand getRedisCommand() {
-		return this.redisCommand;
+		this.params = params;
 	}
 
 	public boolean isSuccess() {
-		return "success".equalsIgnoreCase(this.errCode);
+		if (this.errInfo != null) {
+			return "success".equalsIgnoreCase(this.errInfo.getCode());
+		}
+		return false;
 	}
 
-	public String getErrInfo() {
-		return this.errInfo;
+	public ErrorInfo getErrInfo() {
+		return errInfo;
+	}
+
+	public void setErrInfo(ErrorInfo errInfo) {
+		this.errInfo = errInfo;
+	}
+
+	public byte[] getParams() {
+		return params;
+	}
+
+	public void setParams(byte[] params) {
+		this.params = params;
 	}
 
 	@Override
