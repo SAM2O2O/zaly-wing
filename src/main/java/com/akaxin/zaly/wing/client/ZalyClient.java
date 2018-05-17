@@ -71,9 +71,9 @@ public class ZalyClient {
 				protected void initChannel(Channel channel) throws Exception {
 					channel.pipeline().addLast(new MessageEncoder());
 					channel.pipeline().addLast(new MessageDecoder());
-					channel.pipeline().addLast("timeout", new IdleStateHandler(20, 20, 20, TimeUnit.SECONDS));
-					channel.pipeline().addLast(new WriteTimeoutHandler(20, TimeUnit.SECONDS));
-					channel.pipeline().addLast(new ReadTimeoutHandler(20, TimeUnit.SECONDS));
+					channel.pipeline().addLast("timeout", new IdleStateHandler(5, 5, 5, TimeUnit.MINUTES));
+					channel.pipeline().addLast(new WriteTimeoutHandler(5, TimeUnit.MINUTES));
+					channel.pipeline().addLast(new ReadTimeoutHandler(5, TimeUnit.MINUTES));
 
 					zalyClientHandler = new NettyClientHandler(ZalyClient.this);
 					channel.pipeline().addLast(zalyClientHandler);
